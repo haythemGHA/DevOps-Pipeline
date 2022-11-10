@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+	environment {
+        registry = "haythemgharbi/devops"
+        registryCredential = 'haythem'
+        dockerImage = ''
+    	}
     stages{
         stage("git pull"){
             steps{
@@ -48,6 +53,24 @@ pipeline {
                
             }
         }
+        
+        stage('Building our image') {
+            steps {
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
+            }
+        }
+         stage('Deploy our image') {
+            steps {
+                script {
+                    docker.withRegistry( '', registryCredential ) {
+                        dockerImage.push()
+                    }
+                }
+            }
+        }
+        
                     
 }
 
