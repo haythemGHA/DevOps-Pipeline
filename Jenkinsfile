@@ -33,7 +33,13 @@ pipeline {
                 }
                 
             }  
-        
+        stage('SonarQube stage') {
+          
+            steps {
+            sh'mvn sonar:sonar -Dsonar.login=admin -Dsonar.password=sonar'
+               
+            }
+        } 
                     
 }
 
