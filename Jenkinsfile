@@ -14,30 +14,26 @@ pipeline {
             
         stage('MVN COMPILE') {
                 steps {
-                sh 'mvn clean compile'
+                sh 'mvn compile'
                     
                 }
                 
             }
         stage('clean'){
                 steps{
-                sh 'mvn clean package'
+                sh 'mvn package'
                     
                 }
                 
             }  
         stage('MVN TEST') {
                 steps {
-                sh 'mvn clean test'
+                sh 'mvn test'
                     
                 }
                 
             }  
-        stage('build'){
-            steps{
-                sh 'mvn install package'
-            }
-         }
+        
                     
 }
 
